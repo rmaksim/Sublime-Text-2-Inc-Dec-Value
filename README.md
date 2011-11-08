@@ -1,7 +1,7 @@
 inc_dec_number.py
 =======================================
 
-## Increase/Decrease number by delta_value
+## increase / decrease of numbers (integer and fractional), hex color values, and logical (or any, predetermined, opposing values) on the configured value
 
 ### Support Multiple Selections
 
@@ -67,8 +67,8 @@ Default (Linux).sublime-keymap
 --------------------------------------------------------------------------------
 
     [
-        { "keys": ["alt+up"],  "command": "inc_dec_number", "args": { "delta": 1} },
-        { "keys": ["alt+down"], "command": "inc_dec_number", "args": { "delta": -1} },
-        { "keys": ["super+up"],  "command": "inc_dec_number", "args": { "delta": 10} },
-        { "keys": ["super+down"], "command": "inc_dec_number", "args": { "delta": -10} }
+        { "keys": ["alt+up"],  "command": "inc_dec_value", "args": { "delta": 1} },
+        { "keys": ["alt+down"], "command": "inc_dec_value", "args": { "delta": -1} },
+        { "keys": ["super+up"],  "command": "inc_dec_value", "args": { "delta": 10} },
+        { "keys": ["super+down"], "command": "inc_dec_value", "args": { "delta": -10} }
     ]
