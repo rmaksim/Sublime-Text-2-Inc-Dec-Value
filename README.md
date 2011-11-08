@@ -5,10 +5,10 @@ inc_dec_number.py
 
 ### Support Multiple Selections
 
-![blame screenshot](https://github.com/rmaksim/Sublime-Text-2-Solutions/raw/master/inc_dec_number.gif)
-![blame screenshot](https://github.com/rmaksim/Sublime-Text-2-Solutions/raw/master/inc_dec_hex_color.gif)
-![blame screenshot](https://github.com/rmaksim/Sublime-Text-2-Solutions/raw/master/inc_dec_opposite.gif)
-![blame screenshot](https://github.com/rmaksim/Sublime-Text-2-Solutions/raw/master/inc_dec_float.gif)
+![blame screenshot](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_number.gif)
+![blame screenshot](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_hex_color.gif)
+![blame screenshot](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_opposite.gif)
+![blame screenshot](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_float.gif)
 
 
 Example of the correct values:
