@@ -1,5 +1,4 @@
-inc_dec_number.py
-=======================================
+#Inc-Dec-Value
 
 ## increase / decrease of numbers (integer and fractional), hex color values, and logical (or any, predetermined, opposing values) on the configured value
 
