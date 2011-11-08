@@ -1,6 +1,6 @@
 import sublime, sublime_plugin, re
 
-class IncDecNumberCommand(sublime_plugin.TextCommand):
+class IncDecValueCommand(sublime_plugin.TextCommand):
 
     def run(self, edit, delta):
         for region in self.view.sel():
