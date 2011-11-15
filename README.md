@@ -1,7 +1,6 @@
 #Inc-Dec-Value
 
-## increase / decrease of numbers (integer and fractional),
-dates, hex color values, and logical (or any, predetermined, opposing values) on the configured value and a bonus - string actions (upper, lower, capitalize)
+## increase / decrease of numbers (integer and fractional), dates, hex color values, and logical (or any, predetermined, opposing values) on the configured value and a bonus - string actions (upper, lower, capitalize)
 
 ### Support Multiple Selections
 
@@ -53,6 +52,7 @@ Example of the correct values:
     => 2011-11-15
 
     The increase in year / month / day is its own, without checking the validity of the resulting date.
+
     For days, the value of loops between 1 and 31, for months - loops between 1 and 12.
 
 
