@@ -100,3 +100,15 @@ Default (Linux).sublime-keymap
         { "keys": ["super+up"],  "command": "inc_dec_value", "args": { "delta": 10} },
         { "keys": ["super+down"], "command": "inc_dec_value", "args": { "delta": -10} }
     ]
+
+
+Copyright
+---------
+### Copyright (c) 2011 Razumenko Maksim <razumenko.maksim@gmail.com>
+
+Minor contrib by
+
+  * Denis Ryzhkov <denis@ryzhkov.org>
+  * Vitaly Pikulik <v.pikulik@gmail.com>
+
+MIT License, see http://opensource.org/licenses/MIT
