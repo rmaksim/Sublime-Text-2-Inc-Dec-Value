@@ -119,10 +119,14 @@ inc\_dec\_value.sublime-settings
     {
         "file": "inc_dec_value.sublime-settings"
 
-    ,   "action_inc_min":   1  // default:   1,  key: `alt+up`
-    ,   "action_dec_min":  -1  // default:  -1,  key: `alt+down`
-    ,   "action_inc_max":  10  // default:  10,  key: `super+up`
-    ,   "action_dec_max": -10  // default: -10,  key: `super+down`
+    ,   "action_inc_min":    1  // default:   1,  key: Alt + Up
+    ,   "action_dec_min":   -1  // default:  -1,  key: Alt + Down
+
+    ,   "action_inc_max":   10  // default:  10,  key: Super + Up
+    ,   "action_dec_max":  -10  // default: -10,  key: Super + Down
+
+    ,   "action_inc_all":  100  // default:  10,  key: Super + Alt + Up
+    ,   "action_dec_all": -100  // default: -10,  key: Super + Alt + Down
     }
 
 
@@ -132,8 +136,10 @@ Default (Linux).sublime-keymap
     [
         { "keys": ["alt+up"],         "command": "inc_dec_value", "args": { "action": "inc_min" } },
         { "keys": ["alt+down"],       "command": "inc_dec_value", "args": { "action": "dec_min" } },
+
         { "keys": ["super+up"],       "command": "inc_dec_value", "args": { "action": "inc_max" } },
         { "keys": ["super+down"],     "command": "inc_dec_value", "args": { "action": "dec_max" } },
+
         { "keys": ["super+alt+up"],   "command": "inc_dec_value", "args": { "action": "inc_all" } },
         { "keys": ["super+alt+down"], "command": "inc_dec_value", "args": { "action": "dec_all" } }
     ]
