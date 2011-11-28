@@ -2,6 +2,9 @@
 
 ## increase / decrease of numbers (integer and fractional), dates, hex color values, opposite relations or cycled enumerations on the configured value and a bonus - string actions (upper, lower, capitalize)
 
+**Forum Thread**
+http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
+
 ### Support Multiple Selections
 
 ![blame screenshot](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_number.gif)
