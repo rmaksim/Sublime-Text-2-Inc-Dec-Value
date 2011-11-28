@@ -1,6 +1,6 @@
 #Inc-Dec-Value
 
-## increase / decrease of numbers (integer and fractional), dates, hex color values, and logical (or any, predetermined, opposing values) on the configured value and a bonus - string actions (upper, lower, capitalize)
+## increase / decrease of numbers (integer and fractional), dates, hex color values, opposite relations or cycled enumerations on the configured value and a bonus - string actions (upper, lower, capitalize)
 
 ### Support Multiple Selections
 
@@ -35,33 +35,47 @@ Example of the correct values:
 
   * ### hex colors
 
-    => #123 #123456
+    => #f01 #f00456
 
     Pressing the key `alt+up/down` increases/decreases
-    the one character to the left
+    the one character to the left on +1/-1 (regardless of the settings)
 
-    If the cursor between the '#' and the hex number in the #123
-    the action applies to first character '1'
+    If the cursor between the '#' and the hex number in the #f01
+    the action applies to first character 'f'
 
     Pressing the key `super+up/down` increases/decreases
     the total value of the hex color on +111/-111 or +111111/-111111
+    (regardless of the settings)
 
 
   * ### dates in ISO format `YYYY-MM-DD`
 
     => 2011-11-15
 
-    The increase in year / month / day is its own, without checking the validity of the resulting date.
+    The increase in year / month / day is its own,
+    without checking the validity of the resulting date.
 
-    For days, the value of loops between 1 and 31, for months - loops between 1 and 12.
+    For days, the value of loops between 1 and 31,
+    for months - loops between 1 and 12.
 
 
-  * ### opposite values
+  * ### opposite relations or cycled enumerations
 
-    => true/false, True/False, TRUE/FALSE, left/right
+    => `true > false, True > False, FALSE > TRUE, left > right`
 
-    Pressing the key `alt+up/down`
+    also
+
+    => `truE > false, tRUe > false, FaLsE > true, LeFT > right`
+
+    Pressing the key `super+alt+up/down`
     changes the value under the cursor ("true" or "false") to the opposite
+
+    Version 0.1.0 adds the ability to cycle more than two values:
+
+    => "Jan" > "Feb" > "Mar" > ... > "Dec" > "Jan"
+
+    Example of settings see in
+    <a href="https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_value.sublime-settings">inc\_dec\_value.sublime-settings</a>
 
 
   * ### any string
@@ -76,7 +90,9 @@ Example of the correct values:
 
     **Important !**
     There will be no change of words, which were applied different rules.
-    For example, the opposite of the values "true" will not be given to upper case, as a rule is applied to modify this value to "false".
+    For example, the integer "12px"
+    will not be given "px" to upper case,
+    as a rule is applied to modify this value to "13px".
 
 
 Not supported:
@@ -90,15 +106,36 @@ Not supported:
 
     => #1 #12 #1234 #12345 #1234567...
 
+  * #### and may be something else that would like to see...
+
+    *let me know if you find an error*
+
+    *or you will have new ideas*
+
+
+inc\_dec\_value.sublime-settings
+--------------------------------
+
+    {
+        "file": "inc_dec_value.sublime-settings"
+
+    ,   "action_inc_min":   1  // default:   1,  key: `alt+up`
+    ,   "action_dec_min":  -1  // default:  -1,  key: `alt+down`
+    ,   "action_inc_max":  10  // default:  10,  key: `super+up`
+    ,   "action_dec_max": -10  // default: -10,  key: `super+down`
+    }
+
 
 Default (Linux).sublime-keymap
---------------------------------------------------------------------------------
+------------------------------
 
     [
-        { "keys": ["alt+up"],  "command": "inc_dec_value", "args": { "delta": 1} },
-        { "keys": ["alt+down"], "command": "inc_dec_value", "args": { "delta": -1} },
-        { "keys": ["super+up"],  "command": "inc_dec_value", "args": { "delta": 10} },
-        { "keys": ["super+down"], "command": "inc_dec_value", "args": { "delta": -10} }
+        { "keys": ["alt+up"],         "command": "inc_dec_value", "args": { "action": "inc_min" } },
+        { "keys": ["alt+down"],       "command": "inc_dec_value", "args": { "action": "dec_min" } },
+        { "keys": ["super+up"],       "command": "inc_dec_value", "args": { "action": "inc_max" } },
+        { "keys": ["super+down"],     "command": "inc_dec_value", "args": { "action": "dec_max" } },
+        { "keys": ["super+alt+up"],   "command": "inc_dec_value", "args": { "action": "inc_all" } },
+        { "keys": ["super+alt+down"], "command": "inc_dec_value", "args": { "action": "dec_all" } }
     ]
 
 
@@ -110,5 +147,6 @@ Minor contrib by
 
   * Denis Ryzhkov <denis@ryzhkov.org>
   * Vitaly Pikulik <v.pikulik@gmail.com>
+  * Alexandra Ignatyeva <e.xelga@gmail.com>
 
 MIT License, see http://opensource.org/licenses/MIT

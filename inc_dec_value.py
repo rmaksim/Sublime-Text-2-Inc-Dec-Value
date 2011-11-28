@@ -1,23 +1,37 @@
 '''
+Inc-Dec-Value v0.1.0
 
-    Copyright (c) 2011 Razumenko Maksim <razumenko.maksim@gmail.com>
+Increase / Decrease of
+    - numbers (integer and fractional),
+    - dates in ISO format `YYYY-MM-DD` (months from 1 to 12, days from 1 to 31),
+    - hex color values (#fff or #ffffff),
+    - opposite relations or cycled enumerations (`true`->`false`, `Jan`->`Feb`->`Mar`...),
+    on the configured value
+    and a bonus
+    - string actions (UPPER, lower, Capitalize)
 
-    Minor contrib by
-        Denis Ryzhkov <denis@ryzhkov.org>
-        Vitaly Pikulik <v.pikulik@gmail.com>
+https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value
 
-    MIT License, see http://opensource.org/licenses/MIT
+Copyright (c) 2011 Razumenko Maksim <razumenko.maksim@gmail.com>
 
+Minor contrib by
+    Denis Ryzhkov <denis@ryzhkov.org>
+    Vitaly Pikulik <v.pikulik@gmail.com>
+
+MIT License, see http://opensource.org/licenses/MIT
 '''
 
 import sublime, sublime_plugin, re, string
 
 class IncDecValueCommand(sublime_plugin.TextCommand):
 
-    def run(self, edit, delta):
+    def run(self, edit, action):
 
         self.edit = edit
-        self.delta = int(delta)
+        self.action = action
+
+        self.load_settings()
+        self.delta = self.settings.get("action_" + action)
 
         for region in self.view.sel():
 
@@ -30,9 +44,36 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
                     self.apply_hex_color()          or
                     self.apply_floating_point()     or
                     self.apply_integer()            or
-                    self.apply_opposite()           or
+                    self.apply_enums()              or
                     self.apply_string()
                 )
+
+
+    def load_settings(self):
+        """Load settings from file or set defaults
+
+        default settings - see below `defaults`
+        package settings - ${packages}/Inc-Dec-Value/inc_dec_value.sublime-settings
+        user    settings - ${packages}/User/inc_dec_value.sublime-settings
+
+        if the file `inc_dec_value.sublime-settings` does not exist
+        - accept the default settings.
+        """
+
+        defaults = {
+            "action_inc_min":    1,
+            "action_dec_min":   -1,
+            "action_inc_max":   10,
+            "action_dec_max":  -10,
+            "action_inc_all":  100,
+            "action_dec_all": -100,
+            "enums": []
+        }
+        self.settings = {}
+        settings = sublime.load_settings(__name__ + '.sublime-settings')
+
+        for setting in defaults:
+            self.settings[setting] = settings.get(setting, defaults.get(setting))
 
 
     def apply_date(self):
@@ -85,10 +126,9 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
         if match and prev['sym'] == "#":
 
             tmp_reg = self.word_reg
-            delta = self.delta
 
             # applies for one of hex numbers
-            if delta in [1, -1]:
+            if self.action in ["inc_min", "dec_min"]:
                 # take the symbol to the left
                 # if the cursor between '#' and the number - move it to the right
                 if tmp_reg.begin() == self.region.begin():
@@ -98,14 +138,14 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
 
                 re_hex = re.compile('([0-9a-fA-F])')
 
-            else:
-                delta  = 1 if delta > 0 else -1
+            else: # self.action in ["inc_max", "dec_max"]
                 re_hex = re_hex_color
 
             word = self.get_word(tmp_reg)
             match = re_hex.match(word)
 
             if match:
+                delta = 1 if self.delta > 0 else -1
                 new_word = ""
                 for char in word:
                     char = hex(int(char, 16) + delta & 0xf)[2:]
@@ -164,47 +204,48 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             return True
 
 
-    def apply_opposite(self):
-        """any value from the list `opp_values`"""
+    def apply_enums(self):
+        """any value from the list `enums`"""
+
+        if self.action not in ["inc_all", "dec_all"]:
+            return
 
         word = self.get_word()
 
-        opp_values = [
-            ("true",     "false"),
-            ("True",     "False"),
-            ("TRUE",     "FALSE"),
-            ("left",     "right"),
-            ("top",      "bottom"),
-            ("margin",   "padding"),
-            ("absolute", "relative"),
-            ("width",    "height"),
-        ]
-        new_value = ''
-        for k, v in opp_values:
-            if k == word:
-                new_value = v
-            if v == word:
-                new_value = k
+        fn = string.lower
+        if re.match('^([A-Z1-9_]+)$', word):
+            fn = string.upper
+        if re.match('^([A-Z]{1}[a-z1-9_]+)$', word):
+            fn = string.capitalize
 
-        if new_value:
-            self.replace(new_value)
+        word = string.lower(word)
 
-            return True
+        enums = self.settings.get("enums")
+
+        for enum in enums:
+            if word in enum:
+                delta = 1 if self.delta > 0 else -1
+                new_value = enum[(enum.index(word) + delta) % len(enum)]
+                self.replace(fn(new_value))
+                return True
 
 
     def apply_string(self):
         """any string"""
 
+        if self.action in ["inc_all", "dec_all"]:
+            return
+
         word = self.get_word()
-        match = re.match('([a-zA-Z]+)', word)
+        match = re.match('([a-zA-Z1-9_]+)', word)
 
         if match:
             fn = {
-                  1: string.capitalize, # or capwords ?
-                 -1: string.lower,
-                 10: string.upper,
-                -10: string.lower,
-            }.get(self.delta, None)
+                "inc_min": string.capitalize, # or capwords ?
+                "dec_min": string.lower,
+                "inc_max": string.upper,
+                "dec_max": string.lower,
+            }.get(self.action, None)
 
             fn and self.replace(fn(word))
 
@@ -215,7 +256,7 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
         """@return {string} Previous symbol"""
 
         pos = pos or self.word_reg.begin() - 1
-        sym = self.get_word(pos, pos + 1)
+        sym = self.view.substr(pos) # = self.get_word(pos, pos + 1)
 
         return {'pos': pos, 'sym': sym}
 
@@ -231,9 +272,10 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
 
     def get_word(self, reg_begin = None, reg_end = None):
         """get the text from the editor in the region
-            - from `reg_begin` to `reg_end` if they are integers
-            - from `reg_begin` = sublime.Region() if `reg_end` is None
-            - from `self.word_reg` if `reg_end` and `reg_begin` is None
+
+        - from `reg_begin` to `reg_end` if they are integers
+        - from `reg_begin` = sublime.Region() if `reg_end` is None
+        - from `self.word_reg` if `reg_end` and `reg_begin` is None
         """
 
         if not reg_begin:
