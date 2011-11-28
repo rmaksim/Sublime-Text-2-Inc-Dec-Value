@@ -75,7 +75,7 @@ Example of the correct values:
     => "Jan" > "Feb" > "Mar" > ... > "Dec" > "Jan"
 
     Example of settings see in
-    <a href="https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_value.sublime-settings">inc\_dec\_value.sublime-settings</a>
+    <a href="https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/blob/master/inc_dec_value.sublime-settings">inc\_dec\_value.sublime-settings</a>
 
 
   * ### any string
@@ -113,7 +113,7 @@ Not supported:
     *or you will have new ideas*
 
 
-inc\_dec\_value.sublime-settings
+<a href="https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/blob/master/inc_dec_value.sublime-settings">inc\_dec\_value.sublime-settings</a>
 --------------------------------
 
     {
@@ -127,6 +127,12 @@ inc\_dec\_value.sublime-settings
 
     ,   "action_inc_all":  100  // default:  10,  key: Super + Alt + Up
     ,   "action_dec_all": -100  // default: -10,  key: Super + Alt + Down
+
+    ,   "enums": [ // write values to the list only in lowercase
+            ["yes", "no"]
+        ,   ["true", "false"]
+        ,   ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
+        ]
     }
 
 
