@@ -85,7 +85,7 @@ Example of the correct values:
 
     => string String STRING
 
-    Pressing the key `alt+up` makes the first letter in the word in Uppercase (Capitalize).
+    Pressing the key `alt+up` makes the first letter in the word in Uppercase (Capitalize) without affecting the remaining characters.
 
     Pressing the key `super+up` makes the word in UPPERCASE.
 
