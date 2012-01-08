@@ -7,12 +7,12 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
 
 ### Support Multiple Selections
 
-![blame screenshot](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_number.gif)
-![blame screenshot](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_hex_color.gif)
-![blame screenshot](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_opposite.gif)
-![blame screenshot](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_float.gif)
-![blame screenshot](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_dates.gif)
-![blame screenshot](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_strings.gif)
+![Inc-Dec-Value](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_number.gif)
+![Inc-Dec-Value](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_hex_color.gif)
+![Inc-Dec-Value](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_opposite.gif)
+![Inc-Dec-Value](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_float.gif)
+![Inc-Dec-Value](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_dates.gif)
+![Inc-Dec-Value](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_strings.gif)
 
 
 Example of the correct values:
