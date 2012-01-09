@@ -67,7 +67,8 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             "action_dec_max":  -10,
             "action_inc_all":  100,
             "action_dec_all": -100,
-            "enums": []
+            "enums": [],
+            "force_use_upper_case_for_hex_color": False
         }
         self.settings = {}
         settings = sublime.load_settings(__name__ + '.sublime-settings')
@@ -150,6 +151,9 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
                 for char in word:
                     char = hex(int(char, 16) + delta & 0xf)[2:]
                     new_word += char
+
+                if self.settings.get("force_use_upper_case_for_hex_color"):
+                    new_word = new_word.upper()
 
                 self.replace(new_word, tmp_reg)
 
