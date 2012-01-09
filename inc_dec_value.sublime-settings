@@ -31,4 +31,6 @@
     ,   ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
     ,   ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
     ]
+
+,   "force_use_upper_case_for_hex_color": false
 }
