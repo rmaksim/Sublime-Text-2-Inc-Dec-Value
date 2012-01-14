@@ -132,6 +132,8 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
         ,   ["true", "false"]
         ,   ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
         ]
+
+    ,   "force_use_upper_case_for_hex_color": false
     }
 
 
