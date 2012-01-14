@@ -1,6 +1,6 @@
 #Inc-Dec-Value
 
-#### v0.1.1
+##### v0.1.1
 
 ---
 ## increase / decrease of numbers (integer and fractional), dates, hex color values, opposite relations or cycled enumerations on the configured value and a bonus - string actions (upper, lower, capitalize)
@@ -20,12 +20,12 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
 
 ### Example of the correct values:
 
-  * ### positive and negative integer numbers
+  * ##### positive and negative integer numbers
 
     => ... -2, -1, 0, 1, 2, ...
 
 
-  * ### positive and negative floating-point numbers
+  * ##### positive and negative floating-point numbers
 
     => ... -1.1, -1.19, 0.119, 1.1119, 2.11119, ...
 
@@ -33,12 +33,12 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
     for example 1.19 + `alt+up` = 1.20 and 1.11200 + `alt+down` = 1.11199
 
 
-  * ### positive and negative (integer and floating-point) numbers and any text after them
+  * ##### positive and negative (integer and floating-point) numbers and any text after them
 
     => 12px, -5em, 100%, 42sometext, (24), [12, -13], {77: -88}, 0.1em, 62.5%/1.5
 
 
-  * ### hex colors
+  * ##### hex colors
 
     => #f01 #f00456
 
@@ -53,7 +53,7 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
     (regardless of the settings)
 
 
-  * ### dates in ISO format `YYYY-MM-DD`
+  * ##### dates in ISO format `YYYY-MM-DD`
 
     => 2011-11-15
 
@@ -64,7 +64,7 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
     for months - loops between 1 and 12.
 
 
-  * ### opposite relations or cycled enumerations
+  * ##### opposite relations or cycled enumerations
 
     => `true > false, True > False, FALSE > TRUE, left > right`
 
@@ -83,7 +83,7 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
     <a href="https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/blob/master/inc_dec_value.sublime-settings">inc\_dec\_value.sublime-settings</a>
 
 
-  * ### any string
+  * ##### any string
 
     => string String STRING
 
@@ -102,22 +102,22 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
 
 ### Not supported:
 
-  * #### numbers in the text and after
+  * ##### numbers in the text and after
 
     => qwe42asd, text42
 
-  * #### incorrect hex colors
+  * ##### incorrect hex colors
 
     => #1 #12 #1234 #12345 #1234567...
 
-  * #### and may be something else that would like to see...
+  * ##### and may be something else that would like to see...
 
     *let me know if you find an error*
 
     *or you will have new ideas*
 
 
-### [inc_dec_value.sublime-settings]
+### [inc_dec_value.sublime-settings](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/blob/master/inc_dec_value.sublime-settings)
 
     {
         "file": "inc_dec_value.sublime-settings"
@@ -164,6 +164,3 @@ Minor contrib by
   * Alexandra Ignatyeva <e.xelga@gmail.com>
 
 MIT License, see http://opensource.org/licenses/MIT
-
-
-[inc_dec_value.sublime-settings] https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/blob/master/inc_dec_value.sublime-settings
