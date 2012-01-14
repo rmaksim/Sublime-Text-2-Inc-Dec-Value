@@ -1,5 +1,8 @@
 #Inc-Dec-Value
 
+#### v0.1.1
+
+---
 ## increase / decrease of numbers (integer and fractional), dates, hex color values, opposite relations or cycled enumerations on the configured value and a bonus - string actions (upper, lower, capitalize)
 
 **Forum Thread**
@@ -15,8 +18,7 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
 ![Inc-Dec-Value](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/raw/master/inc_dec_strings.gif)
 
 
-Example of the correct values:
-------------------------------
+### Example of the correct values:
 
   * ### positive and negative integer numbers
 
@@ -98,8 +100,7 @@ Example of the correct values:
     as a rule is applied to modify this value to "13px".
 
 
-Not supported:
---------------
+### Not supported:
 
   * #### numbers in the text and after
 
@@ -116,8 +117,7 @@ Not supported:
     *or you will have new ideas*
 
 
-<a href="https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/blob/master/inc_dec_value.sublime-settings">inc\_dec\_value.sublime-settings</a>
---------------------------------
+### [inc_dec_value.sublime-settings]
 
     {
         "file": "inc_dec_value.sublime-settings"
@@ -139,8 +139,7 @@ Not supported:
     }
 
 
-Default (Linux).sublime-keymap
-------------------------------
+### Default (Linux).sublime-keymap
 
     [
         { "keys": ["alt+up"],         "command": "inc_dec_value", "args": { "action": "inc_min" } },
@@ -154,9 +153,9 @@ Default (Linux).sublime-keymap
     ]
 
 
-Copyright
----------
-### Copyright (c) 2011 Razumenko Maksim <razumenko.maksim@gmail.com>
+### Copyright
+
+#### Copyright (c) 2011 Razumenko Maksim <razumenko.maksim@gmail.com>
 
 Minor contrib by
 
@@ -165,3 +164,6 @@ Minor contrib by
   * Alexandra Ignatyeva <e.xelga@gmail.com>
 
 MIT License, see http://opensource.org/licenses/MIT
+
+
+[inc_dec_value.sublime-settings] https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/blob/master/inc_dec_value.sublime-settings
