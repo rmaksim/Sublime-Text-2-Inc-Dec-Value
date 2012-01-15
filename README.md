@@ -151,7 +151,6 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
 
 
 ### Copyright
-
 **Copyright (c) 2011 Razumenko Maksim <razumenko.maksim@gmail.com>**
 
 Minor contrib by
