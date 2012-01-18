@@ -1,10 +1,10 @@
 [
-  { "keys": ["ctrl+up"],         "command": "inc_dec_value", "args": { "action": "inc_min" } },
-  { "keys": ["ctrl+down"],       "command": "inc_dec_value", "args": { "action": "dec_min" } },
+  { "keys": ["alt+up"],              "command": "inc_dec_value", "args": { "action": "inc_min" } },
+  { "keys": ["alt+down"],            "command": "inc_dec_value", "args": { "action": "dec_min" } },
 
-  { "keys": ["ctrl+alt+up"],       "command": "inc_dec_value", "args": { "action": "inc_max" } },
-  { "keys": ["ctrl+alt+down"],     "command": "inc_dec_value", "args": { "action": "dec_max" } },
+  { "keys": ["alt+super+up"],        "command": "inc_dec_value", "args": { "action": "inc_max" } },
+  { "keys": ["alt+super+down"],      "command": "inc_dec_value", "args": { "action": "dec_max" } },
 
-  { "keys": ["ctrl+super+up"],   "command": "inc_dec_value", "args": { "action": "inc_all" } },
-  { "keys": ["ctrl+super+down"], "command": "inc_dec_value", "args": { "action": "dec_all" } }
+  { "keys": ["super+alt+ctrl+up"],   "command": "inc_dec_value", "args": { "action": "inc_all" } },
+  { "keys": ["super+alt+ctrl+down"], "command": "inc_dec_value", "args": { "action": "dec_all" } }
 ]
