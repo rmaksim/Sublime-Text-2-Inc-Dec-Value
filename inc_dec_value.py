@@ -245,8 +245,8 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
 
         if match:
             fn = {
-                "inc_min": lambda s: s[0].capitalize() + s[1:],
-                "dec_min": string.lower,
+                "inc_min": lambda s: s.capitalize() if s[0].islower() else s.upper(),
+                "dec_min": lambda s: s.capitalize() if s.isupper() else s.lower(),
                 "inc_max": string.upper,
                 "dec_max": string.lower,
             }.get(self.action, None)
