@@ -1,6 +1,6 @@
 #Inc-Dec-Value
 
-**v0.1.1**
+**v0.1.2**
 
 ---
 ## increase / decrease of numbers (integer and fractional), dates, hex color values, opposite relations or cycled enumerations on the configured value and a bonus - string actions (upper, lower, capitalize)
@@ -130,6 +130,7 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
     ,   "enums": [ // write values to the list only in lowercase
             ["yes", "no"]
         ,   ["true", "false"]
+        ,   ["block", "none", "inline", "inline-block"]
         ,   ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
         ]
 
