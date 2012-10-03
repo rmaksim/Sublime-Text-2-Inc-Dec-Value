@@ -1,5 +1,5 @@
 '''
-Inc-Dec-Value v0.1.2
+Inc-Dec-Value v0.1.3
 
 Increase / Decrease of
     - numbers (integer and fractional),
@@ -9,6 +9,8 @@ Increase / Decrease of
     on the configured value
     and a bonus
     - string actions (UPPER, lower, Capitalize)
+
+Instead of the arrows can use your mouse wheel.
 
 https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value
 

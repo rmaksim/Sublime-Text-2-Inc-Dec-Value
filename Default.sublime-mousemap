@@ -1,0 +1,10 @@
+[
+	{ "button": "scroll_up",   "modifiers": ["alt"],          "command": "inc_dec_value", "args": { "action": "inc_min" } },
+	{ "button": "scroll_down", "modifiers": ["alt"],          "command": "inc_dec_value", "args": { "action": "dec_min" } },
+
+	{ "button": "scroll_up",   "modifiers": ["super"],        "command": "inc_dec_value", "args": { "action": "inc_max" } },
+	{ "button": "scroll_down", "modifiers": ["super"],        "command": "inc_dec_value", "args": { "action": "dec_max" } },
+
+	{ "button": "scroll_up",   "modifiers": ["super", "alt"], "command": "inc_dec_value", "args": { "action": "inc_all" } },
+	{ "button": "scroll_down", "modifiers": ["super", "alt"], "command": "inc_dec_value", "args": { "action": "dec_all" } }
+]

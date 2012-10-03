@@ -1,9 +1,11 @@
 #Inc-Dec-Value
 
-**v0.1.2**
+**v0.1.3** - added support for the mouse wheel
 
 ---
 ## increase / decrease of numbers (integer and fractional), dates, hex color values, opposite relations or cycled enumerations on the configured value and a bonus - string actions (upper, lower, capitalize)
+
+Instead of the arrows can use your mouse wheel.
 
 **Forum Thread**
 http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
