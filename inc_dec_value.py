@@ -35,9 +35,10 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
         self.load_settings()
         self.delta = self.settings.get("action_" + action)
 
-        for region in self.view.sel():
+        for index, region in enumerate(self.view.sel()):
 
             self.region = region
+            self.region_index = index # save the index of the current region to reuse it later on replace
             self.word_reg = self.view.word(region)
 
             if not self.word_reg.empty():
@@ -289,10 +290,29 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
     def replace(self, text, region = None):
         """replace text in an editor on the `text`"""
 
+        old_pos = self.view.sel()[self.region_index]
+
         if not region:
             region = self.word_reg
 
         self.view.replace(self.edit, region, text)
+
+
+        # restore the initial position of the cursor
+        offset = len(text) - len(self.view.substr(region))
+
+        self.view.sel().subtract(sublime.Region(region.end() + offset, region.end() + offset))
+
+        offset_start = old_pos.begin() + offset
+        offset_end = old_pos.end() + offset
+
+        if old_pos.begin() == region.begin(): # don't use offset if we're at the start of the initial value
+            offset_start = old_pos.begin()
+
+            if old_pos.begin() == old_pos.end(): # don't use offset for ending point if we're not at selection
+                offset_end = old_pos.end()
+
+        self.view.sel().add(sublime.Region(offset_start, offset_end))
 
 
     def get_word(self, reg_begin = None, reg_end = None):
