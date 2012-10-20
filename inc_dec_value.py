@@ -1,5 +1,5 @@
 '''
-Inc-Dec-Value v0.1.3
+Inc-Dec-Value v0.1.5
 
 Increase / Decrease of
     - numbers (integer and fractional),
@@ -273,7 +273,10 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
                 "dec_max": string.lower,
             }.get(self.action, None)
 
-            fn and self.replace(fn(word))
+            if fn:
+                new_word = fn(word)
+                if word != new_word:
+                    self.replace(new_word)
 
             return True
 
