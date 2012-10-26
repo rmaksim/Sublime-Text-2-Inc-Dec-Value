@@ -50,7 +50,8 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
     If the cursor between the '#' and the hex number in the #f01
     the action applies to first character 'f'
 
-    Pressing the key `super+up/down` increases/decreases
+    Pressing the key `super+up/down`(Linux) or `super+alt+up/down`(Windows & OSX)
+    increases/decreases
     the total value of the hex color on +111/-111 or +111111/-111111
     (regardless of the settings)
 
@@ -74,7 +75,7 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
 
     => `truE > false, tRUe > false, FaLsE > true, LeFT > right`
 
-    Pressing the key `super+alt+up/down`
+    Pressing the key `super+alt+up/down`(Linux) or `super+ctrl+up/down`(Windows) or `super+alt+ctrl+up/down`(OSX)
     changes the value under the cursor ("true" or "false") to the opposite
 
     Version 0.1.0 adds the ability to cycle more than two values:
@@ -91,9 +92,9 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
 
     Pressing the key `alt+up` makes the first letter in the word in Uppercase (Capitalize) without affecting the remaining characters.
 
-    Pressing the key `super+up` makes the word in UPPERCASE.
+    Pressing the key `super+up`(Linux) or `super+alt+up`(Windows & OSX) makes the word in UPPERCASE.
 
-    Pressing the key `alt+down` or `super+down` makes the word in lowercase.
+    Pressing the key `alt+down` or `super+down`(Linux) or `super+alt+down`(Windows & OSX) makes the word in lowercase.
 
     **Important !**
     There will be no change of words, which were applied different rules.
