@@ -1,10 +1,12 @@
 #Inc-Dec-Value
 
-**v0.1.6** - #20 (upper, lower, capitalize) works on non-ascii strings
+**v0.1.7** - [#19](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/19) Swapping the color notation in CSS
 
-**v0.1.5** - #15 Don't place action in undo history when nothing happens
+**v0.1.6** - [#20](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/20) (upper, lower, capitalize) works on non-ascii strings
 
-**v0.1.4** - #14 Saving the position of the cursors/selections on the change
+**v0.1.5** - [#15](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/15) Don't place action in undo history when nothing happens
+
+**v0.1.4** - [#14](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/pull/14) Saving the position of the cursors/selections on the change
 
 **v0.1.3** - added support for the mouse wheel
 
@@ -58,6 +60,21 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
     increases/decreases
     the total value of the hex color on +111/-111 or +111111/-111111
     (regardless of the settings)
+
+    Pressing the key `super+alt+up/down`(Linux) or `super+ctrl+up/down`(Windows) or `super+alt+ctrl+up/down`(OSX)
+    swapping the color notation in CSS:
+
+    from:
+
+        color: rgba(0,17,34,0.4);
+
+    to:
+
+        color: #012; /* alpha: 0.4 */
+
+    again:
+
+        color: rgba(0,17,34,0.4);
 
 
   * **dates in ISO format `YYYY-MM-DD`**

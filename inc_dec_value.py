@@ -1,5 +1,5 @@
 '''
-Inc-Dec-Value v0.1.6
+Inc-Dec-Value v0.1.7
 
 Increase / Decrease of
     - numbers (integer and fractional),
@@ -120,47 +120,130 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
     def apply_hex_color(self):
         """any hex color, ex: #ee77ee; #f12; #f0e"""
 
-        word = self.get_word()
+        if self.action in ["inc_all", "dec_all"]:
 
-        re_hex_color = re.compile('([0-9a-fA-F]{3}([0-9a-fA-F]{3})?){1}$')
-        match = re_hex_color.match(word)
+            # color: rgba(255,0,128,0.4);
+            # color: rgba(0,255,3,0.4);
+            pos_rgba_beg = self.find_left("r")
+            pos_rgba_end = self.find_right(")")
 
-        prev = self.prev()
+            if pos_rgba_beg and pos_rgba_end:
+                pos_rgba_end = pos_rgba_end + 1
 
-        if match and prev['sym'] == "#":
+                if self.view.substr(pos_rgba_end) == ";":
+                    pos_rgba_end = pos_rgba_end + 1
 
-            tmp_reg = self.word_reg
+                rgba_str = self.get_word(pos_rgba_beg, pos_rgba_end)
 
-            # applies for one of hex numbers
-            if self.action in ["inc_min", "dec_min"]:
-                # take the symbol to the left
-                # if the cursor between '#' and the number - move it to the right
-                if tmp_reg.begin() == self.region.begin():
-                    tmp_reg = sublime.Region(tmp_reg.begin(), self.region.end() + 1)
-                else:
-                    tmp_reg = sublime.Region(self.region.begin() - 1, self.region.end())
+                re_rgba = re.compile('rgba\((.*),(.*),(.*),(.*)\)(;?)$')
+                match = re_rgba.match(rgba_str)
 
-                re_hex = re.compile('([0-9a-fA-F])')
+                if match:
+                    hex_str = "#" \
+                            + self.int_to_hex(match.group(1)) \
+                            + self.int_to_hex(match.group(2)) \
+                            + self.int_to_hex(match.group(3)) \
+                            + "; /* alpha: " + match.group(4) +" */"
 
-            else: # self.action in ["inc_max", "dec_max"]
-                re_hex = re_hex_color
+                    self.view.sel().subtract(sublime.Region(self.region.begin(), self.region.end()))
+                    self.view.replace(self.edit, sublime.Region(pos_rgba_beg, pos_rgba_end), hex_str)
+                    self.view.sel().add(sublime.Region(pos_rgba_beg, pos_rgba_beg))
 
-            word = self.get_word(tmp_reg)
-            match = re_hex.match(word)
+                    return True
 
+            # color: #ff1080; /* alpha: 1 */
+            # color: #0f1080;
+            # color: #012; /* alpha: 0.4 */
+            # color: #f12; /* alpha: .1 */
+            # color: #f12; /* alpha: 0 */
+            # color: #f12; /* alpha: 1 */
+            pos_hex_beg = self.word_reg.begin()
+            pos_hex_end = self.word_reg.end()
+            word = self.get_word()
+
+            # curson on #
+            if word[-1] == "#":
+                word2_reg = self.view.word(self.word_reg.end() + 1)
+                pos_hex_beg = self.word_reg.end() - 1
+                pos_hex_end = word2_reg.end()
+            else:
+                prev = self.prev()
+                if prev['sym'] == "#":
+                    pos_hex_beg = self.word_reg.begin() - 1
+                    pos_hex_end = self.word_reg.end()
+
+            alpha = ""
+            pos_alpha1 = self.find_right("/", pos_hex_end)
+            if pos_alpha1:
+                pos_alpha2 = self.find_right("/", pos_alpha1 + 1)
+                alpha_str = self.get_word(pos_alpha1, pos_alpha2 + 1)
+
+                re_alpha = re.compile('^\/\* alpha: (.*) \*\/$')
+                match_alpha = re_alpha.match(alpha_str)
+                if match_alpha:
+                    alpha = match_alpha.group(1)
+
+            word = self.get_word(pos_hex_beg, pos_hex_end)
+
+            re_hex_color = re.compile('(?:#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2}))|(?:#([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1}))$')
+            match = re_hex_color.match(word)
             if match:
-                delta = 1 if self.delta > 0 else -1
-                new_word = ""
-                for char in word:
-                    char = hex(int(char, 16) + delta & 0xf)[2:]
-                    new_word += char
+                r = str(int(match.group(1) or match.group(4) + match.group(4), 16))
+                g = str(int(match.group(2) or match.group(5) + match.group(5), 16))
+                b = str(int(match.group(3) or match.group(6) + match.group(6), 16))
+                rgba_alpha = "1" if alpha == "" else alpha
+                semi = ";" if alpha != "" else ""
+                rgba_str = "rgba("+r+","+g+","+b+","+rgba_alpha+")"+semi
 
-                if self.settings.get("force_use_upper_case_for_hex_color"):
-                    new_word = new_word.upper()
-
-                self.replace(new_word, tmp_reg)
+                self.view.sel().subtract(sublime.Region(self.region.begin(), self.region.end()))
+                self.view.replace(self.edit, sublime.Region(pos_hex_beg, pos_hex_end if alpha == "" else pos_alpha2 + 1), rgba_str)
+                self.view.sel().add(sublime.Region(pos_hex_beg, pos_hex_beg))
 
                 return True
+
+        # "inc_min", "dec_min", "inc_max", "dec_max"
+        else:
+            word = self.get_word()
+
+            re_hex_color = re.compile('([0-9a-fA-F]{3}([0-9a-fA-F]{3})?){1}$')
+            match = re_hex_color.match(word)
+
+            prev = self.prev()
+
+            if match and prev['sym'] == "#":
+
+                tmp_reg = self.word_reg
+
+                # applies for one of hex numbers
+                if self.action in ["inc_min", "dec_min"]:
+                    # take the symbol to the left
+                    # if the cursor between '#' and the number - move it to the right
+                    if tmp_reg.end() == self.region.end():
+                        tmp_reg = sublime.Region(self.region.begin() - 1, self.region.begin())
+                    else:
+                        tmp_reg = sublime.Region(self.region.begin(), self.region.begin() + 1)
+
+                    re_hex = re.compile('([0-9a-fA-F])')
+
+                else: # self.action in ["inc_max", "dec_max"]
+                    re_hex = re_hex_color
+
+                word = self.get_word(tmp_reg)
+                match = re_hex.match(word)
+
+                if match:
+                    delta = 1 if self.delta > 0 else -1
+                    new_word = ""
+                    for char in word:
+                        char = hex(int(char, 16) + delta & 0xf)[2:]
+                        new_word += char
+
+                    if self.settings.get("force_use_upper_case_for_hex_color"):
+                        new_word = new_word.upper()
+
+                    self.replace(new_word, tmp_reg)
+
+                    return True
 
 
     def apply_floating_point(self):
@@ -290,6 +373,15 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
         return {'pos': pos, 'sym': sym}
 
 
+    def next(self, pos = None):
+        """@return {string} Next symbol"""
+
+        pos = pos or self.word_reg.begin() + 1
+        sym = self.view.substr(pos)
+
+        return {'pos': pos, 'sym': sym}
+
+
     def replace(self, text, region = None):
         """replace text in an editor on the `text`"""
 
@@ -333,3 +425,35 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             return self.view.substr(reg_begin)
 
         return self.view.substr(sublime.Region(reg_begin, reg_end))
+
+
+    def find_right(self, sym, pos = None):
+        pos = pos or self.region.begin()
+        line = self.view.line(pos)
+        end_pos = line.end()
+
+        while pos < end_pos:
+            pos_sym = self.view.substr(pos)
+            if pos_sym == sym:
+                return pos
+            pos = pos + 1
+
+
+    def find_left(self, sym, pos = None):
+        pos = pos or self.region.begin()
+        line = self.view.line(pos)
+        pos_beg = line.begin()
+
+        while pos > pos_beg:
+            pos_sym = self.view.substr(pos)
+            if pos_sym == sym:
+                return pos
+            pos = pos - 1
+
+
+    def int_to_hex(self, int_str, digits = 2):
+        hex_str = hex(int(int_str))[2:]
+        if len(hex_str) < digits:
+            hex_str = "0" + hex_str
+
+        return hex_str
