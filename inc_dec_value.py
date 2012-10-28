@@ -1,5 +1,5 @@
 '''
-Inc-Dec-Value v0.1.5
+Inc-Dec-Value v0.1.6
 
 Increase / Decrease of
     - numbers (integer and fractional),
@@ -263,22 +263,22 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             return
 
         word = self.get_word()
-        match = re.match('([a-zA-Z1-9_]+)', word)
+        # match = re.match('([a-zA-Z1-9_]+)', word)
 
-        if match:
-            fn = {
-                "inc_min": lambda s: s.capitalize() if s[0].islower() else s.upper(),
-                "dec_min": lambda s: s.capitalize() if s.isupper() else s.lower(),
-                "inc_max": string.upper,
-                "dec_max": string.lower,
-            }.get(self.action, None)
+        # if match:
+        fn = {
+            "inc_min": lambda s: s.capitalize() if s[0].islower() else s.upper(),
+            "dec_min": lambda s: s.capitalize() if s.isupper() else s.lower(),
+            "inc_max": string.upper,
+            "dec_max": string.lower,
+        }.get(self.action, None)
 
-            if fn:
-                new_word = fn(word)
-                if word != new_word:
-                    self.replace(new_word)
+        if fn:
+            new_word = fn(word)
+            if word != new_word:
+                self.replace(new_word)
 
-            return True
+        return True
 
 
     def prev(self, pos = None):

@@ -1,7 +1,11 @@
 #Inc-Dec-Value
 
+**v0.1.6** - #20 (upper, lower, capitalize) works on non-ascii strings
+
 **v0.1.5** - #15 Don't place action in undo history when nothing happens
+
 **v0.1.4** - #14 Saving the position of the cursors/selections on the change
+
 **v0.1.3** - added support for the mouse wheel
 
 ---
