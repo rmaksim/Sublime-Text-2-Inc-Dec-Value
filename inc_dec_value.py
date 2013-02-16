@@ -74,7 +74,7 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             "force_use_upper_case_for_hex_color": False
         }
         self.settings = {}
-        settings = sublime.load_settings(__name__ + '.sublime-settings')
+        settings = sublime.load_settings('inc_dec_value.sublime-settings')
 
         for setting in defaults:
             self.settings[setting] = settings.get(setting, defaults.get(setting))
