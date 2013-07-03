@@ -39,7 +39,10 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
 
             self.region = region
             self.region_index = index # save the index of the current region to reuse it later on replace
-            self.word_reg = self.view.word(region)
+            if len(region) == 0:
+                self.word_reg = self.view.word(region)
+            else:
+                self.word_reg = region
 
             if not self.word_reg.empty():
                 (
