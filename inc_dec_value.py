@@ -74,7 +74,7 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             "force_use_upper_case_for_hex_color": False
         }
         self.settings = {}
-        settings = sublime.load_settings(__name__ + '.sublime-settings')
+        settings = sublime.load_settings('inc_dec_value.sublime-settings')
 
         for setting in defaults:
             self.settings[setting] = settings.get(setting, defaults.get(setting))
@@ -321,13 +321,13 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             self.word_reg = sublime.Region(self.word_reg.begin(), last['pos'])
             word = self.get_word()
 
-        fn = string.lower
-        if re.match('^([A-Z1-9_]+)$', word):
-            fn = string.upper
-        if re.match('^([A-Z]{1}[a-z1-9_]+)$', word):
-            fn = string.capitalize
+        fn = lambda s: s.lower()
+        if re.match('^[A-Z1-9_]+$', word):
+            fn = lambda s: s.upper()
+        if re.match('^[A-Z][a-z1-9_]+$', word):
+            fn = lambda s: s.capitalize()
 
-        word = string.lower(word)
+        word = word.lower()
 
         enums = self.settings.get("enums")
 
@@ -352,8 +352,8 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
         fn = {
             "inc_min": lambda s: s.capitalize() if s[0].islower() else s.upper(),
             "dec_min": lambda s: s.capitalize() if s.isupper() else s.lower(),
-            "inc_max": string.upper,
-            "dec_max": string.lower,
+            "inc_max": lambda s: s.upper(),
+            "dec_max": lambda s: s.lower(),
         }.get(self.action, None)
 
         if fn:
