@@ -179,12 +179,13 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             pos_alpha1 = self.find_right("/", pos_hex_end)
             if pos_alpha1:
                 pos_alpha2 = self.find_right("/", pos_alpha1 + 1)
-                alpha_str = self.get_word(pos_alpha1, pos_alpha2 + 1)
+                if pos_alpha2:
+                    alpha_str = self.get_word(pos_alpha1, pos_alpha2 + 1)
 
-                re_alpha = re.compile('^\/\* alpha: (.*) \*\/$')
-                match_alpha = re_alpha.match(alpha_str)
-                if match_alpha:
-                    alpha = match_alpha.group(1)
+                    re_alpha = re.compile('^\/\* alpha: (.*) \*\/$')
+                    match_alpha = re_alpha.match(alpha_str)
+                    if match_alpha:
+                        alpha = match_alpha.group(1)
 
             word = self.get_word(pos_hex_beg, pos_hex_end)
 
