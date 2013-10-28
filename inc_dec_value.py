@@ -1,5 +1,5 @@
 '''
-Inc-Dec-Value v0.1.7
+Inc-Dec-Value v0.1.9
 
 Increase / Decrease of
     - numbers (integer and fractional),
@@ -284,6 +284,8 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
         prev = self.prev()
 
         tmp_reg = self.word_reg
+        orig_int = self.get_word(tmp_reg)
+
         if prev['sym'] == "-":
             tmp_reg = sublime.Region(prev['pos'], self.word_reg.end())
 
@@ -294,6 +296,11 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             result = int(match.group(1)) + self.delta
             match2 = match.group(2) or ""
             self.replace(str(result) + match2, tmp_reg)
+
+            pos = self.view.sel()[self.region_index]
+            if orig_int >= 0 and result < 0 and pos.a == tmp_reg.a:
+                self.view.sel().subtract(tmp_reg)
+                self.view.sel().add(sublime.Region(tmp_reg.a+1, tmp_reg.a+1))
 
             return True
 
