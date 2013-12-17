@@ -1,5 +1,7 @@
 #Inc-Dec-Value
 
+**v0.1.11** - [#31](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/31) ST3: Getting TypeError in console when using the number inc/dec functions
+
 **v0.1.10** - [#31](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/31) ST3: Getting TypeError in console when using the number inc/dec functions
 
 **v0.1.9** - Fixed apply_integer (x -> -x when cursor before x)
