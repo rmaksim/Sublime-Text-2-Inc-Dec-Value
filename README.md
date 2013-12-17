@@ -1,5 +1,7 @@
 #Inc-Dec-Value
 
+**v0.1.12** - [#27](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/27) Ability to autosave after incrementing
+
 **v0.1.11** - [#31](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/31) ST3: Getting TypeError in console when using the number inc/dec functions
 
 **v0.1.10** - [#31](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/31) ST3: Getting TypeError in console when using the number inc/dec functions
@@ -169,6 +171,7 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
         ]
 
     ,   "force_use_upper_case_for_hex_color": false
+    ,   "autosave": false
     }
 
 

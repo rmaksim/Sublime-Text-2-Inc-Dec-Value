@@ -33,4 +33,7 @@
     ]
 
 ,   "force_use_upper_case_for_hex_color": false
+
+,   "autosave": false
+
 }

@@ -1,5 +1,5 @@
 '''
-Inc-Dec-Value v0.1.11
+Inc-Dec-Value v0.1.12
 
 Increase / Decrease of
     - numbers (integer and fractional),
@@ -53,6 +53,8 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
                     self.apply_enums()              or
                     self.apply_string()
                 )
+                if self.settings.get("autosave"):
+                    self.view.run_command('save')
 
 
     def load_settings(self):
@@ -74,7 +76,8 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             "action_inc_all":  100,
             "action_dec_all": -100,
             "enums": [],
-            "force_use_upper_case_for_hex_color": False
+            "force_use_upper_case_for_hex_color": False,
+            "autosave": False
         }
         self.settings = {}
         settings = sublime.load_settings('inc_dec_value.sublime-settings')
