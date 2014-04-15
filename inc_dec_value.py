@@ -1,5 +1,5 @@
 '''
-Inc-Dec-Value v0.1.12
+Inc-Dec-Value v0.1.13
 
 Increase / Decrease of
     - numbers (integer and fractional),
@@ -76,6 +76,7 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             "action_inc_all":  100,
             "action_dec_all": -100,
             "enums": [],
+            "user_enums": [],
             "force_use_upper_case_for_hex_color": False,
             "autosave": False
         }
@@ -335,15 +336,23 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             self.word_reg = sublime.Region(self.word_reg.begin(), last['pos'])
             word = self.get_word()
 
-        fn = lambda s: s.lower()
-        if re.match('^[A-Z1-9_]+$', word):
-            fn = lambda s: s.upper()
-        if re.match('^[A-Z][a-z1-9_]+$', word):
-            fn = lambda s: s.capitalize()
+        found = False
 
-        word = word.lower()
+        enums = self.settings.get("enums") + self.settings.get("user_enums")
 
-        enums = self.settings.get("enums")
+        for enum in enums:
+            if word in enum:
+                found = True
+
+        fn = lambda s: s
+        if not found:
+            fn = lambda s: s.lower()
+            if re.match('^[A-Z1-9_]+$', word):
+                fn = lambda s: s.upper()
+            if re.match('^[A-Z][a-z1-9_]+$', word):
+                fn = lambda s: s.capitalize()
+
+            word = word.lower()
 
         for enum in enums:
             if word in enum:

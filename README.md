@@ -1,5 +1,7 @@
 #Inc-Dec-Value
 
+**v0.1.13** - [#35](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/35) Cycle through enum with Java capitalization
+
 **v0.1.12** - [#27](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/27) Ability to autosave after incrementing
 
 **v0.1.11** - [#31](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/31) ST3: Getting TypeError in console when using the number inc/dec functions
@@ -112,6 +114,10 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
     Version 0.1.0 adds the ability to cycle more than two values:
 
     => "Jan" > "Feb" > "Mar" > ... > "Dec" > "Jan"
+
+    Version 0.1.13 adds the ability to cycle through enum with Java capitalization
+
+    => "centerX" > "centerY", "screenLeft" > "screenRight"
 
     Example of settings see in
     <a href="https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/blob/master/inc_dec_value.sublime-settings">inc\_dec\_value.sublime-settings</a>

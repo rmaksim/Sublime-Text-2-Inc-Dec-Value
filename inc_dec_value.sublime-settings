@@ -12,9 +12,8 @@
 ,   "action_dec_all": -100  // default: -10,  key: Super + Alt + Down
 
 
-,   "enums": [ // write values to the list only in lowercase
+,   "enums": [
         ["yes", "no"]
-
     ,   ["true", "false"]
 
     ,   ["relative", "absolute", "fixed" ]
@@ -30,7 +29,11 @@
     ,   ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
     ,   ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
     ,   ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
+
+    ,   ["TODO", "DONE", "FIXME"]
     ]
+
+,   "user_enums": []
 
 ,   "force_use_upper_case_for_hex_color": false
 
