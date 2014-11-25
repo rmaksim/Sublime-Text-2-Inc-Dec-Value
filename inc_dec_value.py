@@ -299,7 +299,7 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
 
             tmp_reg = sublime.Region(prev['pos'], self.word_reg.end())
             word = self.get_word(tmp_reg)
-            match = re.match('(-*\d+\.(\d+))([a-zA-Z%]+)?$', word)
+            match = re.match('(-*\d*\.(\d+))([a-zA-Z%]+)?$', word)
 
             if match:
                 float_len = len(match.group(2))
