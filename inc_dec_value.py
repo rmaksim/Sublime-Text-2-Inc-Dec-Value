@@ -35,6 +35,8 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
         self.load_settings()
         self.delta = self.settings.get("action_" + action)
 
+        self.insert_counter = None
+
         for index, region in enumerate(self.view.sel()):
 
             self.region = region
@@ -44,7 +46,9 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             else:
                 self.word_reg = region
 
-            if not self.word_reg.empty():
+            if self.action[:3] == "ins":
+                self.apply_insert()
+            elif not self.word_reg.empty():
                 (
                     self.apply_date()               or
                     self.apply_hex_color()          or
@@ -71,10 +75,13 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
         defaults = {
             "action_inc_min":    1,
             "action_dec_min":   -1,
+            "action_ins_min":    1,
             "action_inc_max":   10,
             "action_dec_max":  -10,
+            "action_ins_max":   10,
             "action_inc_all":  100,
             "action_dec_all": -100,
+            "action_ins_all":  100,
             "enums": [],
             "user_enums": [],
             "force_use_upper_case_for_hex_color": False,
@@ -85,6 +92,26 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
 
         for setting in defaults:
             self.settings[setting] = settings.get(setting, defaults.get(setting))
+
+    def apply_insert(self):
+        """insert integers starting from first selection or 1 if first selection is not an int"""
+
+        tmp_reg = self.word_reg
+        if self.insert_counter is None:
+            word = self.get_word(tmp_reg)
+            match = re.match('^([0-9]+)$', word)
+
+            if match:
+                self.insert_counter = int(match.group(1))
+            else:
+                self.insert_counter = self.delta
+
+        if tmp_reg.empty():
+            self.view.insert(self.edit, tmp_reg.begin(), str(self.insert_counter))
+        else:
+            self.replace(str(self.insert_counter), tmp_reg)
+
+        self.insert_counter += self.delta
 
 
     def apply_date(self):

@@ -1,10 +1,13 @@
 [
     { "keys": ["alt+up"],         "command": "inc_dec_value", "args": { "action": "inc_min" } },
     { "keys": ["alt+down"],       "command": "inc_dec_value", "args": { "action": "dec_min" } },
+    { "keys": ["alt+insert"],     "command": "inc_dec_value", "args": { "action": "ins_min" } },
 
     { "keys": ["super+up"],       "command": "inc_dec_value", "args": { "action": "inc_max" } },
     { "keys": ["super+down"],     "command": "inc_dec_value", "args": { "action": "dec_max" } },
+    { "keys": ["super+insert"],   "command": "inc_dec_value", "args": { "action": "ins_max" } },
 
     { "keys": ["super+alt+up"],   "command": "inc_dec_value", "args": { "action": "inc_all" } },
-    { "keys": ["super+alt+down"], "command": "inc_dec_value", "args": { "action": "dec_all" } }
+    { "keys": ["super+alt+down"], "command": "inc_dec_value", "args": { "action": "dec_all" } },
+    { "keys": ["super+alt+insert"],"command":"inc_dec_value", "args": { "action": "ins_all" } }
 ]
