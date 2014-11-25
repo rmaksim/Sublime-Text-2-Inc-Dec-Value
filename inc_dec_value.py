@@ -57,8 +57,9 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
                     self.apply_enums()              or
                     self.apply_string()
                 )
-                if self.settings.get("autosave"):
-                    self.view.run_command('save')
+
+        if self.settings.get("autosave"):
+            self.view.run_command('save')
 
 
     def load_settings(self):
