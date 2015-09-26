@@ -1,5 +1,5 @@
 '''
-Inc-Dec-Value v0.1.13
+Inc-Dec-Value v0.1.14
 
 Increase / Decrease of
     - numbers (integer and fractional),

@@ -1,5 +1,7 @@
 #Inc-Dec-Value
 
+**v0.1.14** - [#37](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/pull/37) New Feature & Bug Fixes
+
 **v0.1.13** - [#35](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/35) Cycle through enum with Java capitalization
 
 **v0.1.12** - [#27](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/27) Ability to autosave after incrementing
