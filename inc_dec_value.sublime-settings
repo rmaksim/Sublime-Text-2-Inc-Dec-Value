@@ -4,12 +4,15 @@
 
 ,   "action_inc_min":    1  // default:   1,  key: Alt + Up
 ,   "action_dec_min":   -1  // default:  -1,  key: Alt + Down
+,   "action_ins_min":    1  // default:   1,  key: Alt + Insert
 
 ,   "action_inc_max":   10  // default:  10,  key: Super + Up
 ,   "action_dec_max":  -10  // default: -10,  key: Super + Down
+,   "action_ins_max":   10  // default:  10,  key: Super + Insert
 
-,   "action_inc_all":  100  // default:  10,  key: Super + Alt + Up
-,   "action_dec_all": -100  // default: -10,  key: Super + Alt + Down
+,   "action_inc_all":  100  // default:  100,  key: Super + Alt + Up
+,   "action_dec_all": -100  // default: -100,  key: Super + Alt + Down
+,   "action_ins_all":  100  // default:  100,  key: Super + Alt + Insert
 
 
 ,   "enums": [
