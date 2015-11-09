@@ -42,4 +42,6 @@
 
 ,   "autosave": false
 
+,   "space_after_comma_in_rgba": true
+
 }

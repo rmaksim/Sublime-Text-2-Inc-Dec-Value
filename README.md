@@ -1,5 +1,7 @@
 #Inc-Dec-Value
 
+**v0.1.17** - [#34](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/34) space after comma in rgba
+
 **v0.1.16** - [#32](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/32) convert from rgba() to short notation if its possible
 
 **v0.1.15** - convert from rgba(x,x,x,1): remove /* alpha: 1 */ if alpha == 1
@@ -84,7 +86,7 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
 
     from:
 
-        color: rgba(0,17,34,0.4);
+        color: rgba(0, 17, 34, 0.4);
 
     to:
 
@@ -92,7 +94,7 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
 
     again:
 
-        color: rgba(0,17,34,0.4);
+        color: rgba(0, 17, 34, 0.4);
 
 
   * **dates in ISO format `YYYY-MM-DD`**
@@ -184,6 +186,7 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
 
     ,   "force_use_upper_case_for_hex_color": false
     ,   "autosave": false
+    ,   "space_after_comma_in_rgba": true
     }
 
 
