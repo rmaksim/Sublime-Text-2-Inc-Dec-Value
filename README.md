@@ -1,5 +1,7 @@
 #Inc-Dec-Value
 
+**v0.1.18** - [#33](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/33) added settings for RGB instead RGBA
+
 **v0.1.17** - [#34](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/34) space after comma in rgba
 
 **v0.1.16** - [#32](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/32) convert from rgba() to short notation if its possible
@@ -187,6 +189,7 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
     ,   "force_use_upper_case_for_hex_color": false
     ,   "autosave": false
     ,   "space_after_comma_in_rgba": true
+    ,   "RGB_instead_RGBA": false
     }
 
 

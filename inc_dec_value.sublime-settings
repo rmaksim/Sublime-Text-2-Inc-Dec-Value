@@ -44,4 +44,6 @@
 
 ,   "space_after_comma_in_rgba": true
 
+,   "RGB_instead_RGBA": false
+
 }

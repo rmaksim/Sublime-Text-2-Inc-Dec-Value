@@ -1,5 +1,5 @@
 '''
-Inc-Dec-Value v0.1.17
+Inc-Dec-Value v0.1.18
 
 Increase / Decrease of
     - numbers (integer and fractional),
@@ -87,7 +87,8 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             "user_enums": [],
             "force_use_upper_case_for_hex_color": False,
             "autosave": False,
-            "space_after_comma_in_rgba": True
+            "space_after_comma_in_rgba": True,
+            "RGB_instead_RGBA": False
         }
         self.settings = {}
         settings = sublime.load_settings('inc_dec_value.sublime-settings')
@@ -172,11 +173,12 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
 
                 rgba_str = self.get_word(pos_rgba_beg, pos_rgba_end)
 
-                re_rgba = re.compile('rgba\((.*),(.*),(.*),(.*)\)(;?)$')
+                re_rgba = re.compile('rgb[a]?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*((0.\d+)|(\.\d+)|1)\s*)?\);?$')
+
                 match = re_rgba.match(rgba_str)
 
                 if match:
-                    alpha = match.group(4).strip()
+                    alpha = match.group(4).strip() if match.group(4) else "1"
                     alpha_txt = ("; /* alpha: " + alpha +" */") if alpha != "1" else ";"
 
                     r = self.int_to_hex(match.group(1))
@@ -245,7 +247,10 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
 
                 sp = " " if self.settings.get("space_after_comma_in_rgba") else ""
 
-                rgba_str = "rgba("+r+","+sp+g+","+sp+b+","+sp+rgba_alpha+");"
+                if self.settings.get("RGB_instead_RGBA"):
+                    rgba_str = "rgb("+r+","+sp+g+","+sp+b+");"
+                else:
+                    rgba_str = "rgba("+r+","+sp+g+","+sp+b+","+sp+rgba_alpha+");"
 
                 self.view.sel().subtract(sublime.Region(self.region.begin(), self.region.end()))
                 self.view.replace(self.edit, sublime.Region(pos_hex_beg, pos_hex_end if alpha == "" else pos_alpha2 + 1), rgba_str)
