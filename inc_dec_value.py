@@ -1,5 +1,5 @@
 '''
-Inc-Dec-Value v0.1.15
+Inc-Dec-Value v0.1.16
 
 Increase / Decrease of
     - numbers (integer and fractional),
@@ -157,8 +157,9 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
 
         if self.action in ["inc_all", "dec_all"]:
 
-            # color: rgba(255,0,128,0.4);
-            # color: rgba(0,255,3,0.4);
+            # color: rgba(255,0,135,0); => color: #ff0087; /* alpha: 0 */
+            # color: rgba(0,255,3,0.4); => color: #00ff03; /* alpha: 0.4 */
+            # color: rgba(0,255,51,.1); => color: #0f3; /* alpha: .1 */
             pos_rgba_beg = self.find_left("r")
             pos_rgba_end = self.find_right(")")
 
@@ -177,11 +178,16 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
                     alpha = match.group(4)
                     alpha_txt = ("; /* alpha: " + alpha +" */") if alpha != "1" else ";"
 
-                    hex_str = "#" \
-                            + self.int_to_hex(match.group(1)) \
-                            + self.int_to_hex(match.group(2)) \
-                            + self.int_to_hex(match.group(3)) \
-                            + alpha_txt
+                    r = self.int_to_hex(match.group(1))
+                    g = self.int_to_hex(match.group(2))
+                    b = self.int_to_hex(match.group(3))
+
+                    if (r[0:1] == r[1:2]) and (g[0:1] == g[1:2]) and (b[0:1] == b[1:2]):
+                        r = r[1:]
+                        g = g[1:]
+                        b = b[1:]
+
+                    hex_str = "#" + r + g + b + alpha_txt
 
                     self.view.sel().subtract(sublime.Region(self.region.begin(), self.region.end()))
                     self.view.replace(self.edit, sublime.Region(pos_rgba_beg, pos_rgba_end), hex_str)

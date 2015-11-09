@@ -1,5 +1,7 @@
 #Inc-Dec-Value
 
+**v0.1.16** - [#32](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/32) convert from rgba() to short notation if its possible
+
 **v0.1.15** - convert from rgba(x,x,x,1): remove /* alpha: 1 */ if alpha == 1
 
 **v0.1.14** - [#37](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/pull/37) New Feature & Bug Fixes
