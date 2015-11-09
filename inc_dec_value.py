@@ -1,5 +1,5 @@
 '''
-Inc-Dec-Value v0.1.14
+Inc-Dec-Value v0.1.15
 
 Increase / Decrease of
     - numbers (integer and fractional),
@@ -174,11 +174,14 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
                 match = re_rgba.match(rgba_str)
 
                 if match:
+                    alpha = match.group(4)
+                    alpha_txt = ("; /* alpha: " + alpha +" */") if alpha != "1" else ";"
+
                     hex_str = "#" \
                             + self.int_to_hex(match.group(1)) \
                             + self.int_to_hex(match.group(2)) \
                             + self.int_to_hex(match.group(3)) \
-                            + "; /* alpha: " + match.group(4) +" */"
+                            + alpha_txt
 
                     self.view.sel().subtract(sublime.Region(self.region.begin(), self.region.end()))
                     self.view.replace(self.edit, sublime.Region(pos_rgba_beg, pos_rgba_end), hex_str)
@@ -186,12 +189,12 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
 
                     return True
 
-            # color: #ff1080; /* alpha: 1 */
+            # color: #ff1080; /* alpha: .1 */
             # color: #0f1080;
             # color: #012; /* alpha: 0.4 */
             # color: #f12; /* alpha: .1 */
             # color: #f12; /* alpha: 0 */
-            # color: #f12; /* alpha: 1 */
+            # color: #f12;
             pos_hex_beg = self.word_reg.begin()
             pos_hex_end = self.word_reg.end()
             word = self.get_word()
@@ -221,15 +224,17 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
 
             word = self.get_word(pos_hex_beg, pos_hex_end)
 
-            re_hex_color = re.compile('(?:#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2}))|(?:#([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1}))$')
+            if self.view.substr(pos_hex_end) == ";":
+                pos_hex_end = pos_hex_end + 1
+
+            re_hex_color = re.compile('(?:#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2}))|(?:#([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1}))(;?)$')
             match = re_hex_color.match(word)
             if match:
                 r = str(int(match.group(1) or match.group(4) + match.group(4), 16))
                 g = str(int(match.group(2) or match.group(5) + match.group(5), 16))
                 b = str(int(match.group(3) or match.group(6) + match.group(6), 16))
                 rgba_alpha = "1" if alpha == "" else alpha
-                semi = ";" if alpha != "" else ""
-                rgba_str = "rgba("+r+","+g+","+b+","+rgba_alpha+")"+semi
+                rgba_str = "rgba("+r+","+g+","+b+","+rgba_alpha+");"
 
                 self.view.sel().subtract(sublime.Region(self.region.begin(), self.region.end()))
                 self.view.replace(self.edit, sublime.Region(pos_hex_beg, pos_hex_end if alpha == "" else pos_alpha2 + 1), rgba_str)
