@@ -1,5 +1,5 @@
 '''
-Inc-Dec-Value v0.1.18
+Inc-Dec-Value v0.1.19
 
 Increase / Decrease of
     - numbers (integer and fractional),
@@ -348,10 +348,13 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             orig_int = int(match.group(1))
             result = orig_int + self.delta
             match2 = match.group(2) or ""
+
+            old_pos = self.view.sel()[self.region_index]
+
             self.replace(str(result) + match2, tmp_reg)
 
             pos = self.view.sel()[self.region_index]
-            if orig_int >= 0 and result < 0 and pos.a == tmp_reg.a:
+            if orig_int >= 0 and result < 0 and pos.a == tmp_reg.a and old_pos.a == old_pos.b:
                 self.view.sel().subtract(tmp_reg)
                 self.view.sel().add(sublime.Region(tmp_reg.a+1, tmp_reg.a+1))
 
@@ -462,11 +465,12 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
         if not region:
             region = self.word_reg
 
+        old_len = len(self.view.substr(region))
+
         self.view.replace(self.edit, region, text)
 
-
         # restore the initial position of the cursor
-        offset = len(text) - len(self.view.substr(region))
+        offset = len(text) - old_len
 
         self.view.sel().subtract(sublime.Region(region.end() + offset, region.end() + offset))
 

@@ -1,5 +1,7 @@
 #Inc-Dec-Value
 
+**v0.1.19** - [#30](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/30) cursor duplicates...
+
 **v0.1.18** - [#33](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/33) added settings for RGB instead RGBA
 
 **v0.1.17** - [#34](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/34) space after comma in rgba
