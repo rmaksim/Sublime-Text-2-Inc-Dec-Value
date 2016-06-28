@@ -33,6 +33,8 @@
     ,   ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
     ,   ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
 
+    ,   ["first-child", "last-child", "last-of-type", "nth-child()", "nth-last-child()", "nth-of-type()"]
+
     ,   ["TODO", "DONE", "FIXME"]
     ]
 

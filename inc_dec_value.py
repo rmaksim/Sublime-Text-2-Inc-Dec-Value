@@ -1,5 +1,5 @@
 '''
-Inc-Dec-Value v0.1.20
+Inc-Dec-Value v0.1.21
 
 Increase / Decrease of
     - numbers (integer and fractional),
@@ -371,26 +371,44 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             return
 
         word = self.get_word()
-
+        # print "-----------------------------------------"
         prev = self.prev()
-        if prev['sym'] == "-":
-            prev = self.prev(prev['pos'] - 1)
-            while re.match('([A-Za-z])', prev['sym']):
+        do_prev = True
+        while do_prev:
+            if prev['sym'] == "-":
                 prev = self.prev(prev['pos'] - 1)
+                while re.match('([A-Za-z])', prev['sym']):
+                    prev = self.prev(prev['pos'] - 1)
 
-            prev = self.prev(prev['pos'] + 1)
-            self.word_reg = sublime.Region(prev['pos'], self.word_reg.end())
-            word = self.get_word()
+                prev = self.prev(prev['pos'] + 1)
+                self.word_reg = sublime.Region(prev['pos'], self.word_reg.end())
+                word = self.get_word()
+                prev = self.prev(prev['pos'] - 1)
+            else:
+                do_prev = False
 
         last = self.prev(self.word_reg.end())
-        if last['sym'] == "-":
-            last = self.prev(last['pos'] + 1)
-            while re.match('([A-Za-z])', last['sym']):
+        last_2 = self.prev(self.word_reg.end() + 1)
+        do_last = True
+        while do_last:
+            # print "last['sym']", last['sym']
+            # print "last_2['sym']", last_2['sym']
+            if last['sym'] == "-":
                 last = self.prev(last['pos'] + 1)
+                while re.match('([A-Za-z])', last['sym']):
+                    last = self.prev(last['pos'] + 1)
 
-            self.word_reg = sublime.Region(self.word_reg.begin(), last['pos'])
-            word = self.get_word()
+                self.word_reg = sublime.Region(self.word_reg.begin(), last['pos'])
+                word = self.get_word()
+                last_2 = self.prev(self.word_reg.end() + 1)
+            else:
+                if last['sym'] == "(" and last_2['sym'] == ")":
+                    last = self.prev(last_2['pos'] + 1)
+                    self.word_reg = sublime.Region(self.word_reg.begin(), last['pos'])
+                    word = self.get_word()
+                do_last = False
 
+        # print 'word', word
         found = False
 
         enums = self.settings.get("enums") + self.settings.get("user_enums")
@@ -485,6 +503,12 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
 
             if old_pos.begin() == old_pos.end(): # don't use offset for ending point if we're not at selection
                 offset_end = old_pos.end()
+
+        if offset_start < region.begin():
+            offset_start = region.begin()
+
+        if offset_end < region.begin():
+            offset_end = region.begin()
 
         self.view.sel().add(sublime.Region(offset_start, offset_end))
 
