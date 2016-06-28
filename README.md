@@ -1,5 +1,7 @@
 #Inc-Dec-Value
 
+**v0.1.20** - [#41](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/41) Insert cutting preceding characters
+
 **v0.1.19** - [#30](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/30) cursor duplicates...
 
 **v0.1.18** - [#33](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/33) added settings for RGB instead RGBA
