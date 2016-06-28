@@ -1,6 +1,6 @@
 #Inc-Dec-Value
 
-**v0.1.21** - enums: fixed for values with two "-" and with "(" ")"
+**v0.1.21** - [#40](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/40) enums: fixed for values with few "-" and with "(" ")"
 
 **v0.1.20** - [#41](https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/issues/41) Insert cutting preceding characters
 
@@ -135,9 +135,9 @@ http://www.sublimetext.com/forum/viewtopic.php?f=5&t=2395
 
     => "centerX" > "centerY", "screenLeft" > "screenRight"
 
-    Version 0.1.21 fixed for values with two "-" and with "(" ")"
+    Version 0.1.21 fixed for values with few "-" and with "(" ")"
 
-    => "last-child" => "last-of-type" => "nth-child()"
+    => "last-child" > "last-of-type" > "nth-child()"
 
     Example of settings see in
     <a href="https://github.com/rmaksim/Sublime-Text-2-Inc-Dec-Value/blob/master/inc_dec_value.sublime-settings">inc\_dec\_value.sublime-settings</a>
