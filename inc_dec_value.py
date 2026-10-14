@@ -357,7 +357,7 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
             self.replace(str(result) + match2, tmp_reg)
 
             pos = self.view.sel()[self.region_index]
-            if orig_int >= 0 and result < 0 and pos.a == tmp_reg.a and old_pos.a == old_pos.b:
+            if result < 0 and pos.a == tmp_reg.a and old_pos.a == old_pos.b:
                 self.view.sel().subtract(tmp_reg)
                 self.view.sel().add(sublime.Region(tmp_reg.a+1, tmp_reg.a+1))
 
@@ -483,6 +483,8 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
 
         old_pos = self.view.sel()[self.region_index]
 
+        self.view.sel().subtract(old_pos)
+
         if not region:
             region = self.word_reg
 
@@ -492,8 +494,6 @@ class IncDecValueCommand(sublime_plugin.TextCommand):
 
         # restore the initial position of the cursor
         offset = len(text) - old_len
-
-        self.view.sel().subtract(sublime.Region(region.end() + offset, region.end() + offset))
 
         offset_start = old_pos.begin() + offset
         offset_end = old_pos.end() + offset
